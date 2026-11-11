@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abhishek Indupally</title>
+  <meta name="description" content="Abhishek Indupally — Mechanical engineering researcher at Clemson University working on geometric deep learning, generative design, and surrogate modeling." />
+  <meta property="og:title" content="Abhishek Indupally" />
+  <meta property="og:description" content="Geometric deep learning for engineering design. Researcher, designer, gearhead." />
+  <meta name="theme-color" content="#0b0d10" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Telugu:wght@600&family=Noto+Naskh+Arabic:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Lap progress bar -->
+  <div class="lap" aria-hidden="true">
+    <div class="lap__fill" id="lapFill"></div>
+    <span class="lap__label" id="lapLabel">LAP 1/1</span>
+  </div>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" aria-label="Home">
+      <span class="nav__num">AI</span>
+      <span class="nav__name">INDUPALLY</span>
+    </a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span><span class="sr-only">Menu</span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#research"><b>S1</b> Research</a>
+      <a href="#garage"><b>S2</b> Garage</a>
+      <a href="#journey"><b>S3</b> Journey</a>
+      <a href="about.html">About</a>
+      <a href="#radio" class="nav__cta">Pit Radio</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO / LIGHTS OUT ============ -->
+    <section class="hero">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
+
+      <div class="hero__copy">
+        <a class="flash" href="#garage">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8"/></svg>
+          <span><b>CAPPD Best Paper Award</b> · ASME IDETC-CIE 2026</span>
+        </a>
+        <div class="lights" id="heroLights" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p class="eyebrow" id="lightsText">Lights out and away we go</p>
+
+        <h1 class="hero__title">
+          <span class="hero__greet" id="greet" aria-live="polite">Hello,</span>
+          I'm <span class="accent">Abhishek</span><br />Indupally.
+        </h1>
+        <p class="hero__pron">
+          <span class="mono">/ a-bee-shake /</span> · friends call me <b>Shake</b>
+        </p>
+
+        <p class="hero__lede">
+          Mechanical engineering researcher at <b>Clemson University</b> in the
+          <a href="https://cecas.clemson.edu/cedar/" target="_blank" rel="noopener">CEDAR Group</a>
+          with Dr. Satchit Ramnath.
+          I build deep learning models that learn directly from <b>3D geometry</b> and
+          <b>simulation data</b> for generative design and surrogate modeling, so engineers
+          can explore design spaces faster and make better calls on real hardware.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#garage">Enter the Garage</a>
+          <a class="btn btn--ghost" href="about.html">Meet Shake →</a>
+        </div>
+      </div>
+
+      <div class="hero__track">
+        <svg viewBox="0 0 520 420" class="circuit" role="img" aria-label="Stylized racing circuit with a car lapping it">
+          <defs>
+            <linearGradient id="trackGlow" x1="0" x2="1">
+              <stop offset="0" stop-color="var(--red)" />
+              <stop offset="1" stop-color="var(--amber)" />
+            </linearGradient>
+          </defs>
+          <path id="circuitPath" class="circuit__base"
+            d="M80 330 L300 330 C350 330 360 300 380 270 L440 170 C460 135 440 90 400 90
+               L330 90 C300 90 290 120 270 140 C250 160 220 160 205 140 L170 80
+               C150 50 100 55 90 95 L70 180 C60 220 100 230 120 250 C140 270 110 300 80 300
+               C50 300 40 330 80 330 Z" />
+          <path class="circuit__line" pathLength="1" d="M80 330 L300 330 C350 330 360 300 380 270 L440 170 C460 135 440 90 400 90
+               L330 90 C300 90 290 120 270 140 C250 160 220 160 205 140 L170 80
+               C150 50 100 55 90 95 L70 180 C60 220 100 230 120 250 C140 270 110 300 80 300
+               C50 300 40 330 80 330 Z" stroke="url(#trackGlow)" />
+          <g class="circuit__sf"><rect x="148" y="318" width="6" height="24" /></g>
+          <text x="395" y="320" class="circuit__s s1">S1</text>
+          <text x="455" y="110" class="circuit__s s2">S2</text>
+          <text x="40" y="150" class="circuit__s s3">S3</text>
+          <circle r="7" class="circuit__car">
+            <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#circuitPath" />
+            </animateMotion>
+          </circle>
+        </svg>
+
+        <dl class="telemetry">
+          <div><dt>Team</dt><dd>CEDAR · Clemson ME</dd></div>
+          <div><dt>Focus</dt><dd>Geometric DL · Surrogates</dd></div>
+          <div><dt>Fuel</dt><dd>Faith · Cars · Curiosity</dd></div>
+          <div><dt>Base</dt><dd>Clemson, SC <span class="dim">via India &amp; Saudi Arabia</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ RESEARCH INTERESTS TICKER ============ -->
+    <section class="ticker" aria-label="Research interests">
+      <span class="ticker__label">Research interests</span>
+      <div class="ticker__track">
+        <ul class="ticker__list">
+          <li>Geometric deep learning</li>
+          <li>Graph neural networks</li>
+          <li>Generative design</li>
+          <li>Surrogate modeling</li>
+          <li>CAD &amp; feature representations</li>
+          <li>Physics-informed ML</li>
+          <li>Multimodal learning</li>
+          <li>Design automation</li>
+          <li>Engineering design</li>
+        </ul>
+        <ul class="ticker__list" aria-hidden="true">
+          <li>Geometric deep learning</li>
+          <li>Graph neural networks</li>
+          <li>Generative design</li>
+          <li>Surrogate modeling</li>
+          <li>CAD &amp; feature representations</li>
+          <li>Physics-informed ML</li>
+          <li>Multimodal learning</li>
+          <li>Design automation</li>
+          <li>Engineering design</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ S1 RESEARCH ============ -->
+    <section class="section" id="research" data-sector="S1">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s1">Sector 1</span> Research</p>
+        <h2>Teaching machines to read <span class="accent">engineering geometry</span>.</h2>
+        <p class="section__sub">
+          I apply deep and machine learning to 3D mechanical geometry and FEA data so design teams
+          can explore, prototype and validate faster. The aim is tools that work alongside
+          CAD and CAE, not in place of them.
+        </p>
+      </header>
+
+      <div class="sectors">
+        <article class="sector" style="--c: var(--purple)">
+          <span class="sector__id">01</span>
+          <h3>Generative AI for Engineering Design</h3>
+          <p>Building ML into real design workflows so designers can search constrained design spaces instead of iterating by hand.</p>
+        </article>
+        <article class="sector" style="--c: var(--green)">
+          <span class="sector__id">02</span>
+          <h3>Geometric Representations for ML</h3>
+          <p>Encoding parts and assemblies as CAD features, meshes and graphs that learning models can use, while still reflecting load paths and manufacturability.</p>
+        </article>
+        <article class="sector" style="--c: var(--amber)">
+          <span class="sector__id">03</span>
+          <h3>Data-Driven &amp; Physics-Based Surrogates</h3>
+          <p>Surrogates trained on FEA runs that predict stress, deflection and mass in milliseconds, with physics constraints that keep predictions plausible.</p>
+        </article>
+        <article class="sector" style="--c: var(--red)">
+          <span class="sector__id">04</span>
+          <h3>AI Foundations for Computational Design</h3>
+          <p>Bringing geometry-aware models, surrogates and optimization together into one product development loop.</p>
+        </article>
+      </div>
+
+      <div class="now">
+        <span class="now__dot"></span>
+        <p><b>Currently on track:</b> deep learning on automotive <b>hood frame geometries</b> that
+          learns how shape drives structural performance, for near-instant surrogate prediction.</p>
+      </div>
+    </section>
+
+    <!-- ============ S2 GARAGE / PROJECTS ============ -->
+    <section class="section" id="garage" data-sector="S2">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s2">Sector 2</span> The Garage</p>
+        <h2>Projects, <span class="accent">built and tested</span>.</h2>
+      </header>
+
+      <div class="filters" role="group" aria-label="Filter projects" data-filter-target="#cars .car">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="ml">AI / ML</button>
+        <button class="chip" data-filter="cad">CAD &amp; Geometry</button>
+        <button class="chip" data-filter="mfg">Materials &amp; Manufacturing</button>
+      </div>
+
+      <div class="cars" id="cars">
+        <article class="car car--feature" data-cat="ml cad">
+          <div class="car__top"><span class="car__no">#01</span><span class="car__badge">Research · GNN</span></div>
+          <p class="award-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8"/></svg>
+            CAPPD Best Paper Award · ASME IDETC-CIE 2026, Houston
+          </p>
+          <h3>Bridging CAD and Data-Driven Design: Attributed Feature Graphs for Engineering Design</h3>
+          <p>Introduces <b>Attributed Feature Graphs (AFGs)</b>: CAD features such as extrusions, ribs and pockets become nodes
+            with parametric attributes, linked by geometric and dependency edges. A GNN trained on the
+            <b>CarHoods10K</b> hood-frame dataset predicts stress, mass and deflection, and every prediction
+            traces back to an editable CAD feature.</p>
+          <ul class="stats">
+            <li><b>0.89</b><span>R² mass</span></li>
+            <li><b>0.87</b><span>R² stress &amp; deflection</span></li>
+            <li><b>~9.5%</b><span>MAPE (CNN baselines 8–15%)</span></li>
+            <li><b>93.6%</b><span>within 20% of FEA</span></li>
+          </ul>
+          <p class="car__crew">With Dr. Ibraheem Alawadhi, Dr. Jami J. Shah (Ohio State) &amp; Dr. Satchit Ramnath (Clemson)</p>
+          <div class="car__tags"><span>PyTorch Geometric</span><span>GNNs</span><span>CAD regeneration</span><span>FEA</span></div>
+          <div class="car__links"><a href="https://github.com/aindupally/" target="_blank" rel="noopener">GitHub →</a></div>
+        </article>
+
+        <article class="car" data-cat="ml">
+          <div class="car__top"><span class="car__no">#02</span><span class="car__badge">IDETC 2025 · First author</span></div>
+          <h3>Multimodal ML for Performance Prediction</h3>
+          <p>Combines images, cross-sections and parametric features with geometric context to predict hood-frame performance on CarHoods10K,
+            cutting how often full FEA runs are needed. Outperforms an image-only baseline, especially for stress and deflection,
+            and stays physically plausible on unseen designs.</p>
+          <ul class="stats"><li><b>&lt;20%</b><span>val. error, stress / mass / deflection</span></li></ul>
+          <p class="car__crew">With Dr. Satchit Ramnath</p>
+          <div class="car__tags"><span>Multimodal fusion</span><span>PyTorch</span><span>Surrogates</span></div>
+          <div class="car__links">
+            <a href="https://github.com/aindupally/mmml-performance" target="_blank" rel="noopener">GitHub →</a>
+            <a href="https://scholar.google.com/citations?user=85nRi0cAAAAJ&amp;hl=en" target="_blank" rel="noopener">Paper →</a>
+          </div>
+        </article>
+
+        <article class="car" data-cat="cad">
+          <div class="car__top"><span class="car__no">#03</span><span class="car__badge">Software · C++</span></div>
+          <h3>Development &amp; Analysis of B-Spline Curves</h3>
+          <p>Interactive C++ software for building and editing B-Spline and Bézier curves, NURBS and Bézier surfaces,
+            and ruled surfaces, with knot insertion and refinement, aimed at CAD/CAM design automation.</p>
+          <div class="car__tags"><span>C++</span><span>NURBS</span><span>Computational geometry</span></div>
+          <div class="car__links"><a href="https://github.com/aindupally/design-automation-spring24" target="_blank" rel="noopener">GitHub →</a></div>
+        </article>
+
+        <article class="car" data-cat="mfg">
+          <div class="car__top"><span class="car__no">#04</span><span class="car__badge">Simulation · Optimization</span></div>
+          <h3>Optimizing Surface Roughness in Electrodeposition</h3>
+          <p>Nickel electrodeposition study combining COMSOL Multiphysics, Taguchi methods and simulated annealing,
+            which reduced surface roughness (Δy = 0.258) and defects.</p>
+          <div class="car__tags"><span>COMSOL</span><span>Taguchi DOE</span><span>Simulated annealing</span></div>
+          <div class="car__links"><a href="https://scholar.google.com/citations?user=85nRi0cAAAAJ&amp;hl=en" target="_blank" rel="noopener">Paper →</a></div>
+        </article>
+
+        <article class="car" data-cat="mfg cad">
+          <div class="car__top"><span class="car__no">#05</span><span class="car__badge">Materials · FEA</span></div>
+          <h3>Material Selection for Lightweight Fire-Extinguisher Levers</h3>
+          <p>Screened titanium alloys, silicon nitride and CFRP against a 75 lb actuation load, E ≥ 65 GPa and a
+            –65 °F to 120 °F operating range. <b>409 stainless steel</b> gave the best balance of strength, cost,
+            manufacturability and recyclability.</p>
+          <div class="car__tags"><span>Ashby screening</span><span>FEA</span><span>3D modeling</span></div>
+        </article>
+
+        <article class="car" data-cat="mfg">
+          <div class="car__top"><span class="car__no">#06</span><span class="car__badge">Additive · DOE</span></div>
+          <h3>3D-Printed Brake Pedal via DOE &amp; ASTM Testing</h3>
+          <p>Tensile, flexural and impact testing to ASTM standards across infill pattern, raster angle, layer thickness,
+            material and infill density. Infill density and material mattered most. The final pedal used generative design and
+            reverse engineering.</p>
+          <div class="car__tags"><span>DOE</span><span>ASTM</span><span>Generative design</span><span>Additive</span></div>
+        </article>
+      </div>
+
+      <div class="pubs">
+        <h3>Publications</h3>
+        <ol class="pubs__list">
+          <li>
+            <span class="pubs__year">2026</span>
+            <div>
+              <b>Bridging CAD and Data-Driven Design: Attributed Feature Graphs for Engineering Design.</b>
+              <span class="dim">Indupally, Alawadhi, Shah, Ramnath. ASME IDETC-CIE 2026, Houston, TX.</span>
+              <span class="pubs__award">CAPPD Best Paper Award</span>
+            </div>
+          </li>
+          <li>
+            <span class="pubs__year">2025</span>
+            <div>
+              <b>A multimodal machine learning framework with geometric context for structural performance prediction of an automotive hood frame.</b>
+              <span class="dim">Indupally, Ramnath. ASME IDETC-CIE 2025 (first author).</span>
+            </div>
+          </li>
+        </ol>
+        <!-- TODO: confirm exact titles / author order and add DOI links -->
+        <p class="pubs__more">Full list on <a href="https://scholar.google.com/citations?user=85nRi0cAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar →</a></p>
+      </div>
+
+      <div class="setup">
+        <h3>Setup sheet <span class="dim">· technical skills</span></h3>
+        <!-- Radar values are self-rated 0–100. Edit the data-skills JSON to update. -->
+        <div class="radars">
+          <figure class="radar" style="--c: var(--red)"
+            data-skills='[["Fusion 360",85],["SOLIDWORKS",80],["Siemens NX",78],["CATIA V5",50],["AutoCAD",70],["SimScale",78],["Ansys",80]]'>
+            <figcaption>CAD / CAE tools</figcaption>
+          </figure>
+          <figure class="radar" style="--c: var(--amber)"
+            data-skills='[["Python",78],["C++",72],["MATLAB",85]]'>
+            <figcaption>Programming languages</figcaption>
+          </figure>
+        </div>
+        <div class="setup__grid">
+          <div><h4>ML &amp; Data</h4><p>PyTorch · PyTorch Geometric · Scikit-learn · NumPy · Pandas · NetworkX</p></div>
+          <div><h4>Simulation &amp; Analysis</h4><p>FEA · CFD · COMSOL Multiphysics · Minitab · Excel</p></div>
+          <div><h4>Creative &amp; PM</h4><p>Figma · Photoshop · Illustrator · Premiere Pro · Notion · Zoho · Microsoft 365</p></div>
+          <div><h4>Shop Floor</h4><p>CNC lathe · Mill · Drilling · Additive manufacturing · ASTM testing</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S3 JOURNEY / SEASON HISTORY ============ -->
+    <section class="section" id="journey" data-sector="S3">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s3">Sector 3</span> Season History</p>
+        <h2>Every season, <span class="accent">a new upgrade</span>.</h2>
+        <p class="section__sub">From a mechanical engineering undergrad in Hyderabad to graduate research at Clemson.
+          These are the races, roles and podiums that got me here.</p>
+      </header>
+
+      <ul class="trophies">
+        <li><b>2019</b><span>Lights out at MGIT</span></li>
+        <li><b>5</b><span>Trophies &amp; finals</span></li>
+        <li><b>2</b><span>ASME IDETC papers</span></li>
+        <li><b>P1</b><span>CAPPD Best Paper '26</span></li>
+      </ul>
+
+      <div class="filters" role="group" aria-label="Filter timeline" data-filter-target="#season .ev">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="edu"><i class="dot" style="--c:var(--purple)"></i>Education</button>
+        <button class="chip" data-filter="research"><i class="dot" style="--c:var(--green)"></i>Research</button>
+        <button class="chip" data-filter="work"><i class="dot" style="--c:var(--cyan)"></i>Industry &amp; teaching</button>
+        <button class="chip" data-filter="lead"><i class="dot" style="--c:var(--amber)"></i>Leadership</button>
+        <button class="chip" data-filter="award"><i class="dot" style="--c:var(--red)"></i>Awards</button>
+      </div>
+
+      <div class="season" id="season">
+        <!-- Newest first. Each .ev takes data-type: edu | research | work | lead | award -->
+        <div class="yr">
+          <h3 class="yr__label">2026</h3>
+          <ul class="yr__events">
+            <li class="ev ev--award ev--star" data-type="award research">
+              <span class="ev__date">Aug 2026 · Houston, TX</span>
+              <h4>CAPPD Best Paper Award, ASME IDETC-CIE 2026</h4>
+              <p>“Bridging CAD and Data-driven Design: Attributed Feature Graphs for Engineering Design” won the Computer-Aided
+                Product and Process Development Best Paper Award, with co-authors Dr. Ibraheem Alawadhi, Dr. Jami Shah and Dr. Satchit Ramnath.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2025</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="work">
+              <span class="ev__date">Aug 2025 – May 2026</span>
+              <h4>Graduate Teaching Assistant, ME 2220</h4>
+              <p>Taught the sophomore Mechanical Engineering Laboratory, helping students connect theory to real-world
+                behavior through hands-on experiments and data analysis.</p>
+            </li>
+            <li class="ev" data-type="research">
+              <span class="ev__date">Aug 2025</span>
+              <h4>First-author paper, ASME IDETC 2025</h4>
+              <p>A multimodal ML framework that brings in geometric context to predict the structural performance of an automotive hood frame.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/abhishekindupally_design-engineers-want-to-explore-creative-activity-7372683764398989312-6LFa" target="_blank" rel="noopener">Post →</a>
+            </li>
+            <li class="ev ev--award" data-type="award">
+              <span class="ev__date">Apr 2025</span>
+              <h4>Gold Award, The Duke of Edinburgh's International Award</h4>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2024</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Aug 2024 – May 2025</span>
+              <h4>A2i Cohort Member, Clemson Graduate School</h4>
+              <p>Selected for the Accelerate to Industry cohort, which connects graduate students and postdocs with industry
+                and researchers across disciplines.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/clemson-university-a2i_meet-abhishek-a-member-of-our-2024-2025-activity-7269734648627314689-8BH2" target="_blank" rel="noopener">Post →</a>
+            </li>
+            <li class="ev ev--award" data-type="award research">
+              <span class="ev__date">Mar 2024</span>
+              <h4>Third Place, ME Department Poster Competition</h4>
+              <p>Presented our team's research to faculty, scholars and students, and took home a podium.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/abhishekindupally_phew-its-been-quite-a-while-since-i-was-activity-7186520215650729984-yRPH" target="_blank" rel="noopener">Post →</a>
+            </li>
+            <li class="ev" data-type="work">
+              <span class="ev__date">Feb 2024 – Aug 2025</span>
+              <h4>Graduate Assistant, Office of Research Compliance</h4>
+              <p>Learned research ethics from the inside, including identifying and handling misconduct cases, and came away
+                convinced every student needs research ethics education.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2023</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="research">
+              <span class="ev__date">Sep 2023 – Present</span>
+              <h4>Student Researcher, CEDAR Lab</h4>
+              <p>Joined Dr. Satchit Ramnath's CEDAR group, my first step into the engineering design research I'd always wanted to do.</p>
+              <a class="ev__link" href="https://cecas.clemson.edu/cedar/team/" target="_blank" rel="noopener">CEDAR team →</a>
+            </li>
+            <li class="ev" data-type="edu">
+              <span class="ev__date">Aug 2023 – Present</span>
+              <h4>M.S. Mechanical Engineering, Clemson University</h4>
+              <p>Admitted to the MS/PhD program to pursue research in engineering design.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/abhishekindupally_clemsonuniversity-gradschool-mechanicalengineering-activity-7101028153686458368-JC_L" target="_blank" rel="noopener">Post →</a>
+            </li>
+            <li class="ev" data-type="edu">
+              <span class="ev__date">Jul 2023</span>
+              <h4>Graduation from MGIT</h4>
+              <p>Four intense years, many sleepless nights, great teammates and lifelong friendships.</p>
+            </li>
+            <li class="ev" data-type="work">
+              <span class="ev__date">May – Jul 2023</span>
+              <h4>R&amp;D Prototyping Intern, Unlearners Tech</h4>
+              <p>Designed functional prototypes, including a stethoscope, with rendering, 3D printing and testing alongside the embedded team.</p>
+            </li>
+            <li class="ev ev--award" data-type="award">
+              <span class="ev__date">Apr 2023 · Chennai</span>
+              <h4>Finalist, India Design Week '23</h4>
+              <p>In a 24-hour challenge, designed a stretcher-cum-wheelchair with IoT integration for healthcare.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/abhishekindupally_idw2023-autodesk-designcompetition-activity-7064842282574753792-NzC_" target="_blank" rel="noopener">Post →</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2022</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="work">
+              <span class="ev__date">Dec 2022 – Feb 2023</span>
+              <h4>CAE Product Development Intern, Simulation Lab</h4>
+              <p>CFD analysis of a wing prototype across angles of attack and velocities to build C<sub>L</sub>/C<sub>D</sub> characteristic curves.</p>
+              <a class="ev__link" href="https://www.simulationlab.in/subsonic-aircraft" target="_blank" rel="noopener">Project →</a>
+            </li>
+            <li class="ev" data-type="lead">
+              <span class="ev__date">May – Jul 2022</span>
+              <h4>Design &amp; Publicity Head, Nirvana '22</h4>
+              <p>Led a 110+ member design team producing posters, banners, brochures and merch for the annual college fest.</p>
+            </li>
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Apr 2022 – Jul 2023</span>
+              <h4>Chairperson, SAE MGIT</h4>
+              <p>Elected to lead MGIT's collegiate chapter of SAE for 2022–23.</p>
+            </li>
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Apr 2022</span>
+              <h4>Speaker, Resolution '22</h4>
+              <p>Led a design thinking and UX research session for undergrads across 6+ engineering disciplines.</p>
+              <a class="ev__link" href="https://www.linkedin.com/posts/abhishekindupally_resolution-graphicdesign-seminar-activity-6960246951061729280-DCFT" target="_blank" rel="noopener">Post →</a>
+            </li>
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Mar 2022</span>
+              <h4>Event Coordinator, Antaragni '22 (IIT Kanpur)</h4>
+              <p>National Road Trip coordinator, liaising between clubs and running events for students across Hyderabad.</p>
+            </li>
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Feb 2022 – Jul 2023</span>
+              <h4>President, NOVA – The Literary Club</h4>
+              <p>Ran bi-monthly debates and a Readers' Society that helped students build their language skills through peer discussion.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2021</h3>
+          <ul class="yr__events">
+            <li class="ev ev--race" data-type="work">
+              <span class="ev__date">Oct 2021 – Mar 2022</span>
+              <h4>Design Engineer, QuadTek Racing</h4>
+              <p>Designed, built and raced an all-terrain vehicle in BAJA, using CAD and simulation to tune it for performance, durability and versatility.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2020</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="lead">
+              <span class="ev__date">Mar 2020 – Jul 2023</span>
+              <h4>Co-Founder, aDOPE MGIT</h4>
+              <p>Co-founded a design community that runs competitions, events and seminars for students who love design.</p>
+            </li>
+            <li class="ev ev--award" data-type="award">
+              <span class="ev__date">Feb 2020</span>
+              <h4>1st Place, Aeromania '20 (ASME CBIT)</h4>
+              <p>With Team IOTA, among the first of eleven teams to build a fully working RC aircraft in two days.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="yr">
+          <h3 class="yr__label">2019</h3>
+          <ul class="yr__events">
+            <li class="ev" data-type="edu">
+              <span class="ev__date">Aug 2019 – Jul 2023</span>
+              <h4>B.Tech Mechanical Engineering, MGIT</h4>
+              <p>Started the journey at Mahatma Gandhi Institute of Technology. Lights out.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="season__cv">
+        <a class="btn btn--ghost" href="https://docs.google.com/document/d/1onJy1J_VAtJjRv24wj5ctXiGsRqQPY7PuLRPiEvacDw/edit?usp=sharing" target="_blank" rel="noopener">Download full CV</a>
+      </div>
+    </section>
+
+    <!-- ============ PADDOCK TEASER ============ -->
+    <section class="section section--tight">
+      <a class="teaser" href="about.html">
+        <div>
+          <p class="eyebrow"><span class="tag">Paddock</span> Beyond the lab</p>
+          <h2>Third-culture kid. Believer. Gearhead.</h2>
+          <p class="section__sub">India → Saudi Arabia → South Carolina. Faith, guitar, books, pickleball, and far too many opinions about Formula 1.</p>
+        </div>
+        <span class="teaser__go">Meet Shake <span aria-hidden="true">→</span></span>
+      </a>
+    </section>
+
+    <!-- ============ PIT RADIO / CONTACT ============ -->
+    <section class="section radio" id="radio" data-sector="FINISH">
+      <div class="radio__inner">
+        <p class="eyebrow"><span class="radio__live"></span> Pit Radio · Open channel</p>
+        <h2>In networking, every connection is a <span class="accent">winning lap</span>.</h2>
+        <p class="section__sub">Research collaborations, internships, a pickleball match or a Formula 1 debate. I'm happy to talk.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="mailto:aindupally@gmail.com">aindupally@gmail.com</a>
+          <a class="btn btn--ghost" href="https://docs.google.com/document/d/1onJy1J_VAtJjRv24wj5ctXiGsRqQPY7PuLRPiEvacDw/edit?usp=sharing" target="_blank" rel="noopener">Download CV</a>
+        </div>
+        <ul class="socials">
+          <li><a href="http://linkedin.com/in/abhishekindupally/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/aindupally" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?user=85nRi0cAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="http://www.instagram.com/thesaudindian/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeCcFaqFMEnHiNVueA9CWVcW-Itbouq-F1Ph_pxhP32Ja5Lxg/viewform" target="_blank" rel="noopener">Contact form</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__flag" aria-hidden="true"></div>
+    <p>© <span id="year"></span> Abhishek Indupally · Built in Clemson, SC · <span class="dim">Soli Deo gloria</span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

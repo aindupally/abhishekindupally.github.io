@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Shake · Abhishek Indupally</title>
+  <meta name="description" content="About Abhishek (Shake) Indupally — third-culture kid, believer, gearhead, guitarist and pickleball enthusiast." />
+  <meta name="theme-color" content="#0b0d10" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Telugu:wght@600&family=Noto+Naskh+Arabic:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="lap" aria-hidden="true">
+    <div class="lap__fill" id="lapFill"></div>
+    <span class="lap__label" id="lapLabel">LAP 1/1</span>
+  </div>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" aria-label="Home">
+      <span class="nav__num">AI</span>
+      <span class="nav__name">INDUPALLY</span>
+    </a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span><span class="sr-only">Menu</span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="index.html">← Home</a>
+      <a href="#story">Story</a>
+      <a href="#faith">Faith</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#offtrack">Off&nbsp;Track</a>
+      <a href="index.html#radio" class="nav__cta">Pit Radio</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ ABOUT HERO ============ -->
+    <section class="about-hero">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
+      <div class="about-hero__copy">
+        <p class="eyebrow"><span class="tag">Paddock</span> Driver profile</p>
+        <h1 class="about-hero__title">
+          Hello! <span lang="te" class="t-amber">నమస్కారం!</span>
+          <span lang="ar" dir="rtl" class="t-green">مرحبا!</span>
+        </h1>
+        <p class="hero__lede">
+          I'm Abhishek, but please call me <b>Shake</b>. I'm a twenty-something gearhead in grad school,
+          driven by faith in Christ, cars and curiosity. In short, I'm a <b>researcher, designer and strategist</b>
+          who also loves personal growth and good relationships.
+        </p>
+      </div>
+
+      <!-- Portrait: save a photo as assets/about/portrait.jpg and it appears here automatically -->
+      <figure class="portrait">
+        <img src="assets/about/portrait.jpg" alt="Portrait of Abhishek Indupally" onerror="this.remove()" />
+        <figcaption class="portrait__ph"><span class="nav__num">AI</span><span>Add assets/about/portrait.jpg</span></figcaption>
+        <span class="portrait__no">#AI</span>
+      </figure>
+    </section>
+
+    <!-- ============ DRIVER PROFILE CARD ============ -->
+    <section class="section section--tight">
+      <dl class="profile">
+        <div><dt>Name</dt><dd>Abhishek Indupally <span class="dim">/ a-bee-shake /</span></dd></div>
+        <div><dt>Call sign</dt><dd>Shake</dd></div>
+        <div><dt>Roots</dt><dd>India</dd></div>
+        <div><dt>Grew up</dt><dd>Saudi Arabia</dd></div>
+        <div><dt>Home track</dt><dd>Clemson, SC</dd></div>
+        <div><dt>Team</dt><dd>CEDAR Group</dd></div>
+        <div><dt>Favorite film</dt><dd><i>Cars</i>, all-time</dd></div>
+        <div><dt>Series followed</dt><dd>F1 · WEC</dd></div>
+        <div><dt>Hidden talent</dt><dd>Impressively fast clapping</dd></div>
+        <div><dt>First headline</dt><dd>National newspaper, age 3</dd></div>
+      </dl>
+    </section>
+
+    <!-- ============ STORY / THIRD CULTURE ============ -->
+    <section class="section" id="story" data-sector="S1">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s1">Story</span> Third-culture kid</p>
+        <h2>Three countries, <span class="accent">one curious kid</span>.</h2>
+        <p class="section__sub">
+          Originally from India, I grew up as an expat in Saudi Arabia, and I'm now in the US for graduate school.
+          Growing up between cultures left me curious about people, languages and history,
+          and good at feeling at home almost anywhere.
+        </p>
+      </header>
+
+      <div class="passport">
+        <article class="stamp" style="--c: var(--amber)">
+          <span class="stamp__code">IND</span>
+          <p class="stamp__word" lang="te">నమస్కారం</p>
+          <h3>India</h3>
+          <p>Roots, family and an undergrad in mechanical engineering at MGIT, Hyderabad.</p>
+        </article>
+        <article class="stamp" style="--c: var(--green)">
+          <span class="stamp__code">KSA</span>
+          <p class="stamp__word" lang="ar" dir="rtl">مرحبا</p>
+          <h3>Saudi Arabia</h3>
+          <p>Where I grew up as an expat. Hence <span class="mono">@thesaudindian</span>.</p>
+        </article>
+        <article class="stamp" style="--c: var(--purple)">
+          <span class="stamp__code">USA</span>
+          <p class="stamp__word">Hello</p>
+          <h3>United States</h3>
+          <p>Graduate research at Clemson. Go Tigers!</p>
+        </article>
+      </div>
+
+      <div class="facts">
+        <article><span class="facts__n">01</span><p>My values and morals come from my <b>faith in Christ</b>.</p></article>
+        <article><span class="facts__n">02</span><p><i>Cars</i> is my all-time favorite movie. That and a certain TV show with three Brits started my <b>Formula 1</b> obsession.</p></article>
+        <article><span class="facts__n">03</span><p>I can <b>clap impressively fast</b>. Ask me to clap next time you see me.</p></article>
+        <article><span class="facts__n">04</span><p>At three, I was featured in a <b>national newspaper</b> for naming countries and car models from their flags and designs.</p></article>
+      </div>
+    </section>
+
+    <!-- ============ FAITH ============ -->
+    <section class="section section--tight" id="faith" data-sector="S2">
+      <div class="faith">
+        <div class="faith__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 60"><path d="M17 0h6v18h17v6H23v36h-6V24H0v-6h17z"/></svg>
+        </div>
+        <div>
+          <p class="eyebrow">Driven by faith · my motto</p>
+          <blockquote>
+            “Therefore encourage one another and build each other up, just as in fact you are doing.”
+            <cite><a href="https://www.bible.com/bible/111/1TH.5.11-18.NIV" target="_blank" rel="noopener">1 Thessalonians 5:11–18 (NIV)</a></cite>
+          </blockquote>
+          <p>My faith in Christ shapes my values, my work and how I treat the people around me.
+            I'd like to spread love, joy and peace wherever I go, to the point of being the human equivalent of
+            hitting “reply all” by accident. Most days start with Bible reading and prayer, and the playlist is mostly
+            <b>CityAlight</b>, <b>Sovereign Grace</b> and <b>Shane &amp; Shane</b>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section" id="gallery" data-sector="S2">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s2">Gallery</span> Photo paddock</p>
+        <h2>Life, <span class="accent">between sessions</span>.</h2>
+        <p class="section__sub">Friends, game days and the moments in between.</p>
+      </header>
+
+      <!--
+        HOW TO ADD PHOTOS
+        1. Put images in assets/gallery/ named 01.jpg, 02.jpg, ... (or change the src below).
+        2. Update each figcaption and alt text.
+        3. Add class "shot--wide" or "shot--tall" to a figure for a bigger tile.
+        Missing images show a placeholder, so the layout works before you add photos.
+      -->
+      <div class="gallery">
+        <figure class="shot shot--wide">
+          <img src="assets/gallery/01.jpg" alt="Game day at Clemson's Memorial Stadium" loading="lazy" onerror="this.remove()" />
+          <figcaption>Game day in Death Valley. GO TIGERS!!!</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gallery/02.jpg" alt="With friends" loading="lazy" onerror="this.remove()" />
+          <figcaption>The pit crew (a.k.a. my friends)</figcaption>
+        </figure>
+        <figure class="shot shot--tall">
+          <img src="assets/gallery/03.jpg" alt="Playing guitar" loading="lazy" onerror="this.remove()" />
+          <figcaption>Strings attached</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gallery/04.jpg" alt="Courtside at a college basketball game" loading="lazy" onerror="this.remove()" />
+          <figcaption>Courtside for college basketball</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gallery/05.jpg" alt="On the pickleball court" loading="lazy" onerror="this.remove()" />
+          <figcaption>Pickleball, the current obsession</figcaption>
+        </figure>
+        <figure class="shot shot--wide">
+          <img src="assets/gallery/06.jpg" alt="Car spotting" loading="lazy" onerror="this.remove()" />
+          <figcaption>Car spotting in the wild</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gallery/07.jpg" alt="At ASME IDETC-CIE 2026 in Houston with co-authors" loading="lazy" onerror="this.remove()" />
+          <figcaption>Best Paper in Houston with my co-authors</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gallery/08.jpg" alt="Back home" loading="lazy" onerror="this.remove()" />
+          <figcaption>Back home</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ OFF TRACK / HOBBIES ============ -->
+    <section class="section" id="offtrack" data-sector="S3">
+      <header class="section__head">
+        <p class="eyebrow"><span class="tag tag--s3">Off Track</span> Life outside the lab</p>
+        <h2>When the engine's <span class="accent">cooling down</span>.</h2>
+      </header>
+
+      <div class="hobbies">
+        <article class="hobby hobby--wide">
+          <span class="hobby__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 17h2l2-5h10l2 5h2M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M7 12l2-4h6l2 4"/></svg>
+          </span>
+          <h3>Racing &amp; car spotting</h3>
+          <p>F1 and WEC on weekends, car spotting the rest of the week. I even raced an all-terrain vehicle in BAJA
+            with QuadTek Racing as an undergrad.</p>
+        </article>
+        <article class="hobby">
+          <span class="hobby__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 3l7 7M17 6l-6 6M11 12a4 4 0 1 0-5 5c1.5 1.5 4 2 5.5.5S12 14 11 12z"/></svg>
+          </span>
+          <h3>Guitar</h3>
+          <p>Worship sets, old favorites and whatever riff is stuck in my head this week.</p>
+        </article>
+        <article class="hobby">
+          <span class="hobby__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1zM12 6v14"/></svg>
+          </span>
+          <h3>Reading</h3>
+          <p>History, faith and good stories. I used to run my college's Readers' Society.</p>
+        </article>
+        <article class="hobby">
+          <span class="hobby__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L20 20"/><circle cx="19" cy="5" r="1.5"/></svg>
+          </span>
+          <h3>Pickleball</h3>
+          <p>My current sport of choice, and probably too competitive about the kitchen line.</p>
+        </article>
+        <article class="hobby">
+          <span class="hobby__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
+          </span>
+          <h3>Cultures &amp; languages</h3>
+          <p>History rabbit holes, new words and learning how other people see the world.</p>
+        </article>
+      </div>
+
+      <div class="react" id="react">
+        <div class="react__info">
+          <p class="eyebrow">Pit lane mini-game</p>
+          <h3>How fast are your reactions?</h3>
+          <p>Hit start, wait for all five lights, then click the moment they go out. F1 drivers average around 0.2 seconds.</p>
+          <p class="react__best">Your best: <b class="mono" id="reactBest">—</b></p>
+        </div>
+        <button class="react__pad" id="reactPad" aria-live="polite">
+          <span class="lights lights--big" id="reactLights"><span></span><span></span><span></span><span></span><span></span></span>
+          <span class="react__msg" id="reactMsg">Click to start</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section section--tight" data-sector="FINISH">
+      <a class="teaser" href="index.html#radio">
+        <div>
+          <p class="eyebrow"><span class="radio__live"></span> Pit Radio</p>
+          <h2>Want to talk research, racing or faith?</h2>
+          <p class="section__sub">Every connection is a winning lap.</p>
+        </div>
+        <span class="teaser__go">Get in touch <span aria-hidden="true">→</span></span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__flag" aria-hidden="true"></div>
+    <p>© <span id="year"></span> Abhishek Indupally · Built in Clemson, SC · <span class="dim">Soli Deo gloria</span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
