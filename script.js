@@ -16,10 +16,12 @@
       const open = links.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open);
     });
-    $$("a", links).forEach(a => a.addEventListener("click", () => {
-      links.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }));
+    links.addEventListener("click", e => {
+      if (e.target.closest("a")) {
+        links.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
   }
 
   /* ---------- Hero start lights ---------- */
@@ -38,14 +40,16 @@
 
   /* ---------- Rotating greeting (English · Telugu · Arabic) ---------- */
   const greet = $("#greet");
-  if (greet && !reduceMotion) {
-    const greetings = [
-      { t: "Hello,", lang: "en" },
-      { t: "నమస్కారం,", lang: "te" },
-      { t: "مرحبا،", lang: "ar", dir: "rtl" },
-    ];
-    let gi = 0;
-    setInterval(() => {
+  let greetTimer = null;
+  const greetings = [
+    { t: "Hello,", lang: "en" },
+    { t: "నమస్కారం,", lang: "te" },
+    { t: "مرحبا،", lang: "ar", dir: "rtl" },
+  ];
+  let gi = 0;
+  const startGreet = () => {
+    if (!greet || reduceMotion || greetTimer) return;
+    greetTimer = setInterval(() => {
       greet.classList.add("swap");
       setTimeout(() => {
         gi = (gi + 1) % greetings.length;
@@ -56,74 +60,201 @@
         greet.classList.remove("swap");
       }, 350);
     }, 2800);
-  }
+  };
+  const stopGreet = () => { clearInterval(greetTimer); greetTimer = null; };
 
-  /* ---------- Lap progress + active nav ---------- */
+  /* ---------- Pause animations that are off-screen ---------- */
+  const circuit = $("#circuit");
+  const ticker = $("#ticker");
+  const hero = $(".hero");
+  const visIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const on = e.isIntersecting;
+      if (e.target === hero) {
+        on ? startGreet() : stopGreet();
+        if (circuit && circuit.pauseAnimations) on ? circuit.unpauseAnimations() : circuit.pauseAnimations();
+      }
+      e.target.classList.toggle("is-paused", !on);
+    });
+  });
+  [hero, ticker].forEach(el => el && visIO.observe(el));
+
+  /* ---------- Lap progress + active nav (rAF-throttled) ---------- */
   const fill = $("#lapFill");
   const label = $("#lapLabel");
   const sectored = $$("[data-sector]");
   const navMap = Object.fromEntries(
-    $$(".nav__links a").filter(a => a.getAttribute("href").startsWith("#"))
-      .map(a => [a.getAttribute("href").slice(1), a])
+    $$(".nav__links a[href^='#']").map(a => [a.getAttribute("href").slice(1), a])
   );
+  let ticking = false;
+  let lastId = undefined;
 
-  function onScroll() {
+  function update() {
+    ticking = false;
     const h = document.documentElement;
     const p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
-    if (fill) fill.style.width = (p * 100).toFixed(2) + "%";
+    if (fill) fill.style.transform = `scaleX(${p.toFixed(4)})`;
 
     let current = null;
+    const line = window.innerHeight * 0.4;
     for (const el of sectored) {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.4) current = el;
+      if (el.getBoundingClientRect().top < line) current = el; else break;
     }
-    const id = current && current.id;
-    Object.entries(navMap).forEach(([k, a]) => a.classList.toggle("is-active", k === id));
+    const id = current ? current.id : null;
+    if (id !== lastId) {
+      Object.entries(navMap).forEach(([k, a]) => a.classList.toggle("is-active", k === id));
+      lastId = id;
+    }
     if (label) {
       const s = current ? current.dataset.sector : "S1";
       label.textContent = p > 0.985 ? "CHEQUERED FLAG" : `LAP 1/1 · ${s} · ${Math.round(p * 100)}%`;
     }
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  window.addEventListener("scroll", () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
 
   /* ---------- Reveal on scroll ---------- */
   const revealEls = $$(
-    ".section__head, .sector, .car, .stamp, .faith, .hobby, .react, .pubs, .setup, .now, " +
-    ".trophies, .yr, .teaser, .profile, .facts article, .shot"
+    ".section__head, .spec__row, .car, .stamp, .faith, .hobby, .react, .pubs, .setup, " +
+    ".trophies, .yr, .driver, .carousel"
   );
-  revealEls.forEach(el => el.classList.add("reveal"));
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add("is-in");
-      io.unobserve(e.target);
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    revealEls.forEach(el => el.classList.add("reveal"));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach(el => io.observe(el));
+  }
 
-  /* ---------- Generic filters (projects + timeline) ---------- */
+  /* ---------- Project tags ---------- */
+  const tagbar = $("#tagbar");
+  const cars = $$("#cars .car");
+  if (tagbar && cars.length) {
+    const counts = new Map();
+    // turn each <li>Tag</li> into a clickable button
+    cars.forEach(car => {
+      car.dataset.tags = "";
+      $$(".ptags li", car).forEach(li => {
+        const tag = li.textContent.trim();
+        car.dataset.tags += tag + "|";
+        counts.set(tag, (counts.get(tag) || 0) + 1);
+        li.innerHTML = "";
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = tag;
+        b.dataset.tag = tag;
+        b.setAttribute("aria-label", `Show projects tagged ${tag}`);
+        li.appendChild(b);
+      });
+    });
+
+    const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    const mkChip = (tag, n, label) => {
+      const c = document.createElement("button");
+      c.type = "button";
+      c.className = "chip";
+      c.dataset.tag = tag;
+      c.innerHTML = `${label}<span class="chip__n">${n}</span>`;
+      tagbar.appendChild(c);
+      return c;
+    };
+    mkChip("all", cars.length, "All projects");
+    // bar shows tags shared by 2+ projects; one-off tags stay clickable on the cards
+    sorted.filter(([, n]) => n > 1).forEach(([t, n]) => mkChip(t, n, t));
+
+    let active = "all";
+    const apply = tag => {
+      active = tag;
+      $$(".chip", tagbar).forEach(c => {
+        const on = c.dataset.tag === tag;
+        c.classList.toggle("is-active", on);
+        c.setAttribute("aria-pressed", on);
+      });
+      $$(".ptags button").forEach(b => b.classList.toggle("is-on", b.dataset.tag === tag));
+      cars.forEach(car => {
+        const show = tag === "all" || car.dataset.tags.split("|").includes(tag);
+        car.classList.toggle("is-hidden", !show);
+        if (show) car.classList.add("is-in");
+      });
+    };
+    tagbar.addEventListener("click", e => {
+      const c = e.target.closest(".chip");
+      if (c) apply(c.dataset.tag);
+    });
+    $("#cars").addEventListener("click", e => {
+      const b = e.target.closest(".ptags button");
+      if (!b) return;
+      apply(active === b.dataset.tag ? "all" : b.dataset.tag);
+      const top = tagbar.getBoundingClientRect().top;
+      if (top < 0) tagbar.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+    });
+    apply("all");
+  }
+
+  /* ---------- Timeline filters ---------- */
   $$(".filters[data-filter-target]").forEach(group => {
     const chips = $$(".chip", group);
     const items = $$(group.dataset.filterTarget);
-    chips.forEach(chip => chip.addEventListener("click", () => {
+    group.addEventListener("click", e => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
       chips.forEach(c => {
         c.classList.toggle("is-active", c === chip);
         c.setAttribute("aria-pressed", c === chip);
       });
       const f = chip.dataset.filter;
       items.forEach(it => {
-        const tags = (it.dataset.cat || it.dataset.type || "").split(" ");
-        const show = f === "all" || tags.includes(f);
+        const show = f === "all" || (it.dataset.type || "").split(" ").includes(f);
         it.classList.toggle("is-hidden", !show);
       });
-      // collapse empty year rows on the timeline
       $$(".yr").forEach(yr => {
         const any = $$(".ev", yr).some(ev => !ev.classList.contains("is-hidden"));
         yr.classList.toggle("is-hidden", !any);
         if (any) yr.classList.add("is-in");
       });
-      items.forEach(it => it.classList.add("is-in"));
+    });
+  });
+
+  /* ---------- Gallery carousel (native swipe + buttons + dots) ---------- */
+  $$(".carousel").forEach(car => {
+    const track = $(".carousel__track", car);
+    const slides = $$(".slide", track);
+    const dotsEl = $(".carousel__dots", car);
+    const [prev, next] = $$(".carousel__btn", car);
+    if (!track || !slides.length) return;
+
+    const dots = slides.map(() => {
+      const d = document.createElement("span");
+      dotsEl && dotsEl.appendChild(d);
+      return d;
+    });
+    const step = () => slides[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 14);
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      const i = Math.round(track.scrollLeft / step());
+      dots.forEach((d, k) => d.classList.toggle("is-on", k === Math.min(i, slides.length - 1)));
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+    };
+    let raf = 0;
+    track.addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }, { passive: true });
+    [prev, next].forEach(btn => btn && btn.addEventListener("click", () => {
+      track.scrollBy({ left: step() * Number(btn.dataset.dir), behavior: reduceMotion ? "auto" : "smooth" });
     }));
+    track.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        track.scrollBy({ left: step() * (e.key === "ArrowRight" ? 1 : -1) });
+      }
+    });
+    window.addEventListener("resize", sync, { passive: true });
+    sync();
   });
 
   /* ---------- Skill radar charts ---------- */
@@ -140,11 +271,11 @@
       parent && parent.appendChild(e);
       return e;
     };
+    const cap = fig.querySelector("figcaption");
 
     const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
-      "aria-label": `${fig.querySelector("figcaption").textContent}: ` + data.map(d => `${d[0]} ${d[1]}`).join(", ") });
+      "aria-label": `${cap.textContent}: ` + data.map(d => `${d[0]} ${d[1]}`).join(", ") });
 
-    // rings + tick labels
     [25, 50, 75, 100].forEach(v => {
       el("polygon", { class: "radar__ring", points: data.map((_, i) => pt(i, v).join(",")).join(" ") }, svg);
     });
@@ -153,12 +284,11 @@
       t.textContent = v;
       return t;
     });
-    // spokes + axis labels
     const axisLabels = data.map(([name], i) => {
       const [x, y] = pt(i, 100);
       el("line", { class: "radar__spoke", x1: cx, y1: cy, x2: x, y2: y }, svg);
       const c = Math.cos(ang(i)), s = Math.sin(ang(i));
-      const [lx, ly] = pt(i, 100 + 16);
+      const [lx, ly] = pt(i, 116);
       const t = el("text", {
         class: "radar__axis", x: lx, y: ly + (s > 0.3 ? 12 : s < -0.3 ? -4 : 4),
         "text-anchor": c > 0.3 ? "start" : c < -0.3 ? "end" : "middle",
@@ -166,17 +296,14 @@
       t.textContent = name;
       return t;
     });
-    // data area, then tick labels on top so they stay legible
     el("polygon", { class: "radar__area", points: data.map((d, i) => pt(i, d[1]).join(",")).join(" ") }, svg);
     ticks.forEach(t => svg.appendChild(t));
 
-    // tooltip
     const tip = document.createElement("div");
     tip.className = "radar__tip";
     tip.setAttribute("role", "status");
     fig.appendChild(tip);
 
-    // points + bigger invisible hit targets
     data.forEach(([name, v], i) => {
       const [x, y] = pt(i, v);
       const dot = el("circle", { class: "radar__pt", cx: x, cy: y, r: 5 }, svg);
@@ -202,9 +329,8 @@
       hit.addEventListener("blur", off);
     });
 
-    fig.insertBefore(svg, fig.querySelector("figcaption").nextSibling);
+    cap.after(svg);
 
-    // table view
     const det = document.createElement("details");
     det.innerHTML = `<summary>View as table</summary><table><tbody>${
       data.map(([name, v]) => `<tr><td>${name}</td><td>${v}</td></tr>`).join("")
