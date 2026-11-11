@@ -6,7 +6,7 @@
   <title>Abhishek Indupally · AI/ML Mechanical Engineering Researcher</title>
   <meta name="description" content="Abhishek (Shake) Indupally is a mechanical engineering researcher at Clemson University working on geometric deep learning, generative design and surrogate modeling for engineering design." />
   <link rel="canonical" href="https://www.abhishekindupally.com/" />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="theme-color" content="#000000" />
   <meta name="color-scheme" content="dark" />
 
   <meta property="og:type" content="website" />
@@ -18,7 +18,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <!-- Telugu & Arabic fonts: only the glyphs used on the page are downloaded -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@600&family=Noto+Naskh+Arabic:wght@600&display=swap&text=%E0%B0%A8%E0%B0%AE%E0%B0%B8%E0%B1%8D%E0%B0%95%E0%B0%BE%E0%B0%B0%E0%B0%82%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C!," rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
@@ -49,10 +49,14 @@
 <body>
   <a class="skip" href="#research">Skip to content</a>
 
-  <div class="lap" aria-hidden="true">
-    <div class="lap__fill" id="lapFill"></div>
-    <span class="lap__label" id="lapLabel">LAP 1/1</span>
-  </div>
+  <!-- Mini-map HUD: the car laps the circuit as you scroll through the four sectors -->
+  <a class="hud" id="hud" href="#top" aria-label="Back to top">
+    <svg class="hud__map" id="hudMap" viewBox="20 30 460 330" aria-hidden="true"></svg>
+    <span class="hud__read">
+      <span class="hud__sector" id="hudSector">Pit lane</span>
+      <span class="hud__speed"><b id="hudSpeed">0</b> km/h</span>
+    </span>
+  </a>
 
   <header class="nav" id="nav">
     <a href="#top" class="nav__brand" aria-label="Back to top">
@@ -74,7 +78,7 @@
   <main id="top">
     <!-- ============ HERO / LIGHTS OUT ============ -->
     <section class="hero">
-      <div class="hero__grid-bg" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
 
       <div class="hero__copy">
         <div class="lights" id="heroLights" aria-hidden="true">
@@ -83,8 +87,8 @@
         <p class="eyebrow" id="lightsText">Lights out and away we go</p>
 
         <h1 class="hero__title">
-          <span class="hero__greet" id="greet" aria-live="polite">Hello,</span>
-          I'm <span class="accent">Abhishek</span><br />Indupally.
+          <span class="hero__greet"><span id="greet" aria-live="polite">Hello,</span> I'm</span>
+          <span class="accent">Abhishek</span><br />Indupally.
         </h1>
         <p class="hero__pron">
           <span class="mono">/ a-bee-shake /</span> · friends call me <b>Shake</b>
@@ -106,27 +110,16 @@
       </div>
 
       <div class="hero__track">
-        <svg viewBox="0 0 520 420" class="circuit" id="circuit" role="img" aria-label="Stylized racing circuit with a car lapping it">
-          <defs>
-            <linearGradient id="trackGlow" x1="0" x2="1">
-              <stop offset="0" stop-color="#ff2b2b" />
-              <stop offset="1" stop-color="#ffb020" />
-            </linearGradient>
-          </defs>
+        <!-- The four coloured sectors and their labels are drawn by script.js from #circuitPath.
+             Sector 1–4 map to Research, Garage, Journey and About. -->
+        <svg viewBox="0 0 520 420" class="circuit" id="circuit" role="img" aria-label="Racing circuit split into four sectors: Research, Garage, Journey and About">
           <path id="circuitPath" class="circuit__base"
             d="M80 330 L300 330 C350 330 360 300 380 270 L440 170 C460 135 440 90 400 90
                L330 90 C300 90 290 120 270 140 C250 160 220 160 205 140 L170 80
                C150 50 100 55 90 95 L70 180 C60 220 100 230 120 250 C140 270 110 300 80 300
                C50 300 40 330 80 330 Z" />
-          <path class="circuit__line" pathLength="1" stroke="url(#trackGlow)"
-            d="M80 330 L300 330 C350 330 360 300 380 270 L440 170 C460 135 440 90 400 90
-               L330 90 C300 90 290 120 270 140 C250 160 220 160 205 140 L170 80
-               C150 50 100 55 90 95 L70 180 C60 220 100 230 120 250 C140 270 110 300 80 300
-               C50 300 40 330 80 330 Z" />
-          <rect class="circuit__sf" x="148" y="318" width="6" height="24" />
-          <text x="395" y="320" class="circuit__s s1">S1</text>
-          <text x="455" y="110" class="circuit__s s2">S2</text>
-          <text x="40" y="150" class="circuit__s s3">S3</text>
+          <g id="circuitSectors"></g>
+          <rect class="circuit__sf" x="78" y="318" width="5" height="24" />
           <circle r="7" class="circuit__car">
             <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
               <mpath href="#circuitPath" />
@@ -177,12 +170,12 @@
       <header class="section__head">
         <p class="eyebrow"><span class="tag tag--s1">Sector 1</span> Research</p>
         <h2>Teaching machines to read <span class="accent">engineering geometry</span>.</h2>
-        <p class="section__sub">
-          I apply deep and machine learning to 3D mechanical geometry and FEA data so design teams
-          can explore, prototype and validate faster. The aim is tools that work alongside
-          CAD and CAE, not in place of them.
-        </p>
       </header>
+      <p class="statement" data-scrub>
+        I apply deep and machine learning to 3D mechanical geometry and FEA data so design teams
+        can explore, prototype and validate faster. The aim is tools that work alongside
+        CAD and CAE, not in place of them.
+      </p>
 
       <ol class="spec">
         <li class="spec__row">
